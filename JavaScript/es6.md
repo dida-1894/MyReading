@@ -57,3 +57,21 @@ let y = 2;
 - 不能new，不可以当作构造函数。
 - 没有arguments对象，可以用rest参数代替
 - 不能作为generator函数
+
+## Set和Map数据结构
+### Set
+> 类似数组(但不是数组 输出值的 Set { 1, '1', 2 }),所有的成员都是唯一值，没有重复。
+>  Set 结构没有键名，只有键值（或者说键名和键值是同一个值）
+
+-  `const s = new Set();`Set 本身是一个构造函数，用来生成 Set 数据结构
+- 用作数组除重 `let newArr = [...new Set(oldArr)]`  `let usingSet2 = Array.from(new Set(array))`
+- 操作方法
+  - add(value)：添加某个值，返回 Set 结构本身。
+  - delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。
+  - has(value)：返回一个布尔值，表示该值是否为Set的成员。
+  - clear()：清除所有成员，没有返回值
+- 遍历方法
+  - keys()：返回键名的遍历器
+  - values()：返回键值的遍历器
+  - entries()：返回键值对的遍历器
+  - forEach()：使用回调函数遍历每个成员
