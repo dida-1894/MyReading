@@ -31,3 +31,5 @@
 >每一个阶段都有一个装有callbacks的fifo queue(队列)，当event loop运行到一个指定阶段时，
 node将执行该阶段的fifo queue(队列)，当队列callback执行完或者执行callbacks数量超过该阶段的上限时，
 event loop会转入下一下阶段.
+
+- process.nextTick()不在event loop的任何阶段执行，而是在各个阶段切换的中间执行,即从一个阶段切换到下个阶段前执行。
