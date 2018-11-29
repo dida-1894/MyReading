@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://www.promisejs.org/polyfills/promise-done-7.0.4.min.js"></script>
+  <title>用一个小动画来学习promise</title>
+  <style media="screen">
+    .ball{
+      width: 60px;
+      height: 60px;
+      border-radius: 30px;
+      margin-left: 0px
+    }
+    .ball1{
+      background-color: #286
+    }
+    .ball2{
+      background-color: #486
+    }
+    .ball3{
+      background-color: #886
+    }
+  </style>
+</head>
+<body>
+  <h1>用一个小动画来学习promise</h1>
+  <button type="button" id="setTimeoutCB" name="button">using setTimeout callback</button>
+  <button type="button" id="promise" name="button">using promise</button>
+  <div class="ball ball1"></div>
+  <div class="ball ball2"></div>
+  <div class="ball ball3"></div>
+  <div class="text">
+    promise的then方法记得要return返回一个promise对象，
+    而不是只是单纯的调用某个函数哟。promise定义里resolve可以看作是
+    下一个执行下一个then方法回调，而resolve里传递的参数，也可以
+    在下一个then方法里拿到。promise会保证then方法的回调顺序
+    但是then方法的执行必须要等待上一个promise完成。
+  </div>
+</body>
+<script type="text/javascript">
+  var ball1 = document.querySelector('.ball1')
+  var ball2 = document.querySelector('.ball2')
+  var ball3 = document.querySelector('.ball3')
+  ball1.style.marginLeft = 0
+  ball2.style.marginLeft = 0
+  ball3.style.marginLeft = 0
+  var setTimeoutCB = document.querySelector('#setTimeoutCB')
+  var usingPromise = document.querySelector('#promise')
+
+  function ballAnimate(ball, distance, cb){
+    setTimeout(function() {
+      var marginLeft = parseInt(ball.style.marginLeft, 10)
+      if (marginLeft == distance) {
+        cb()
+      } else {
+        if (marginLeft < distance) {
+          marginLeft++
+        } else {
+          marginLeft--
+        }
+        ball.style.marginLeft = marginLeft + 'px'
+        ballAnimate(ball, distance, cb)
+      }
+    }, 13)
+  }
+
+  function promiseAnimate(ball, distance) {
+    return new Promise(function(resolve, reject){
+      function _ballAnimate(){
+        setTimeout(function() {
+          var marginLeft = parseInt(ball.style.marginLeft, 10)
+          if (marginLeft == distance) {
+            resolve()
+          } else {
+            if (marginLeft < distance) {
+              marginLeft++
+            } else {
+              marginLeft--
+            }
+            ball.style.marginLeft = marginLeft + 'px'
+            _ballAnimate()
+          }
+        }, 13)
+      }
+      _ballAnimate()
+    })
+  }
+
+  setTimeoutCB.addEventListener('click', function() {
+    ballAnimate(ball1, 100, function() {
+      ballAnimate(ball2, 200, function() {
+        ballAnimate(ball3, 300, function() {
+          ballAnimate(ball3, 150, function() {
+            ballAnimate(ball2, 150, function() {
+              ballAnimate(ball1, 150, function() {
+                alert("完成了")
+              })
+            })
+          })
+        })
+      })
+    })
+  })
+
+  usingPromise.addEventListener('click', function() {
+    promiseAnimate(ball1, 100)
+      .then(function() {
+        return promiseAnimate(ball2, 200)
+      })
+      .then(function() {
+        return promiseAnimate(ball3, 300)
+      })
+      .then(function() {
+        return promiseAnimate(ball3, 150)
+      })
+      .then(function() {
+        return promiseAnimate(ball2, 150)
+      })
+      .then(function() {
+        return promiseAnimate(ball1, 150)
+      })
+  })
+
+</script>
+
+</html>
