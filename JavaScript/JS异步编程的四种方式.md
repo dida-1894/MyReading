@@ -36,5 +36,30 @@ f1().then(f2).then(f3)
 
 f1().then(f2).fail(f3)
 ```
-
 - 回调变成链式，流程清晰。
+- 基本语法
+  - 定义一个函数（包裹）return一个promise实例
+- 异常捕获
+  - throw new Error 语法报错，业务逻辑之外的报错
+  - 业务逻辑之内的错误，例如请求图片地址404，调用reject()方法
+- 多个串联
+  - 多个then()的创联使用主要看前一个then()return的promise对象
+  - 如果前一个then没有return promise新对象，那两个回调函数操作的是同一个promise对象
+- Promise.all Promise.race
+  - .all([promise1,promise2,...]).then(datas => {
+    console.log(datas[0])
+    console.log(datas[1])
+    ...
+    })
+    //接收一个promise对象数组，全部完成之后，统一执行success
+  - .race([promise1, promise2, ...]).then(data => {
+    console.log(data) //promise数组里最先完成的promise返回值
+    })
+    //接收一个promise对象数组，只有有一个完成就执行success
+- Promise标准
+  - 状态变化
+    - pending - > fulfilled || -> rejected
+  - then
+    - promise实例必须实现then方法
+    - then方法必须接收两个函数作为参数
+    - then返回的必须是一个promise实例

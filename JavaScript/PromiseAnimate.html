@@ -34,7 +34,7 @@
   <div class="text">
     promise的then方法记得要return返回一个promise对象，
     而不是只是单纯的调用某个函数哟。promise定义里resolve可以看作是
-    下一个执行下一个then方法回调，而resolve里传递的参数，也可以
+    执行下一个then方法回调（即callback），而resolve里传递的参数，也可以
     在下一个then方法里拿到。promise会保证then方法的回调顺序
     但是then方法的执行必须要等待上一个promise完成。
   </div>
