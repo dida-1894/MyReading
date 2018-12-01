@@ -7,7 +7,7 @@
 - 在之前的构造函数里的继承实现之一 `Dog.prototype = new Animal()`
 - class里 `class Dog extends Animal {...} `
 - Dog的constructor里记得使用`super(填入父类constructor里的参数)` ，先/看作是对父类constructor的传递吧
-
+- super([arguments]); // 调用 父对象/父类 的构造函数
 
 - class更贴合面向对象的思想
 - 对继承更易读
