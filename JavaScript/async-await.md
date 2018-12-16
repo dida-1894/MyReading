@@ -24,3 +24,10 @@ const load = async () => {
   const result2 = await loadImg(src2)
 }
 ```
+### async
+- async函数作用主要是处理返回值
+- async函数返回一个Promise对象 return 返回值 == return Promise.resolve(返回值)
+没有返回值 Promise.resolve(undefined)
+### await
+- 如果await后面是一个Promise对象，Promise resolve的值就是await表达式的运算结果
+- 如果await后面的不是一个Promise对象， await的结果就是后面跟的表达式的结果
