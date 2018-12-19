@@ -31,3 +31,5 @@ const load = async () => {
 ### await
 - 如果await后面是一个Promise对象，Promise resolve的值就是await表达式的运算结果
 - 如果await后面的不是一个Promise对象， await的结果就是后面跟的表达式的结果
+
+> async会将后面跟的函数（函数表达式）的放回值封装成一个Promise对象，await将等待这个Promise完成，并将其resolve的结果返回出来。
